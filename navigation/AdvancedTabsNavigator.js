@@ -2,7 +2,8 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet } from "react-native";
-import Persistence from "../screens/advanced/SecureStorageScreen"
+import Persistence from "../screens/advanced/SecureStorageScreen";
+import GestureScreen from "../screens/advanced/GestureScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +26,15 @@ export default function IntermediateTabs() {
                     tabBarLabel: "Persistence",
                     tabBarIcon: ({ focused, color }) => <Ionicons name={focused ? "log-in" : "log-in-outline"} size={24} color={color} />,
                 }}
-            />           
+            />
+            <Tab.Screen
+                name="Gesture"
+                component={GestureScreen}
+                options={{
+                    tabBarLabel: "Gestures",
+                    tabBarIcon: ({ focused, color }) => <Ionicons name={focused ? "hand-left" : "hand-left-outline"} size={24} color={color} />,
+                }}
+            />
         </Tab.Navigator>
     );
 }

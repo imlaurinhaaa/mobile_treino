@@ -23,11 +23,11 @@ export default function CarouselExample() {
                             height={300}
                             data={data}
                             autoPlay={true}
-                            autoPlayInterval={3000}
+                            autoPlayInterval={1500}
                             scrollAnimationDuration={1000}
                             renderItem={({ item }) => (
                                 <View style={styles.item}>
-                                    <Image source={{ uri: item.imageUrl }} style={styles.image} resizeMode="contain" />
+                                    <Image source={{ uri: item.imageUrl }} style={styles.image} />
                                 </View>
                             )}
                         />
@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     image: {
         width: "100%",
         height: 260,
+        resizeMode: "contain",
     },
     indexText: {
         fontSize: 16,
