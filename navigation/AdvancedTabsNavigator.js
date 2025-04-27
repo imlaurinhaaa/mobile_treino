@@ -24,7 +24,7 @@ export default function IntermediateTabs() {
                 component={Persistence}
                 options={{
                     tabBarLabel: "Persistence",
-                    tabBarIcon: ({ focused, color }) => <Ionicons name={focused ? "log-in" : "log-in-outline"} size={24} color={color} />,
+                    tabBarIcon: ({ focused, color }) => <Ionicons name={focused ? "shield" : "shield-outline"} size={24} color={color} />,
                 }}
             />
             <Tab.Screen
