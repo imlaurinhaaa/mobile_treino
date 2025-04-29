@@ -1,11 +1,90 @@
-import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, SafeAreaView, StyleSheet, TouchableOpacity, Alert, Modal, KeyboardAvoidingView, Platform, Image } from "react-native";
 
 export default function AlertaModalScreen() {
+    // Estado para controlar a visibilidade do modal
+    const [modalVisible, setModalVisible] = useState(false);
+    // Estado para armazenar o nome digitado pelo usuário
+    const [nome, setNome] = useState("");
+
     return (
-        <View style={styles.container}>
-            <Image source={{ uri: "https://pbs.twimg.com/media/FNaByxLXMAE_Ruc.png" }} style={{ width: 300, height: 265 }} />
-        </View>
+        <SafeAreaView style={styles.safeArea}>
+            {/* Componente para evitar sobreposição do teclado em dispositivos iOS */}
+            <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                {/* Título principal da tela */}
+                <Text style={styles.title}>🎯 Mensagens</Text>
+                {/* Subtítulo explicativo */}
+                <Text style={styles.subtitle}>Com Alertas e Modal</Text>
+
+                <View style={styles.card}>
+                    {/* Descrição sobre o uso de alertas */}
+                    <Text style={styles.description}>
+                        🔹 <Text style={styles.highlight}>Alertas</Text> Usado para exibir mensagens temporárias ao usuário, como notificações ou avisos rápidos.
+                    </Text>
+                    {/* Descrição sobre o uso de modais */}
+                    <Text style={styles.description}>
+                        🔹 <Text style={styles.highlight}>Modal</Text> Um componente que aparece sobre o conteúdo da página, geralmente para coletar entradas do usuário ou exibir informações importantes.
+                    </Text>
+
+                    {/* Botão para exibir um alerta */}
+                    <TouchableOpacity
+                        style={styles.botao}
+                        onPress={() =>
+                            Alert.alert(
+                                "Alerta", // Título do alerta
+                                "Você clicou no botão de alerta!", // Mensagem do alerta
+                                [
+                                    { text: "OK" }, // Botão de confirmação
+                                    { text: "Cancelar" }, // Botão de cancelamento
+                                ],
+                                { cancelable: true } // Permite fechar o alerta clicando fora
+                            )
+                        }
+                    >
+                        <Text style={styles.botaoTexto}>Mostrar Alerta</Text>
+                    </TouchableOpacity>
+
+                    {/* Botão para exibir o modal */}
+                    <TouchableOpacity style={styles.botao} onPress={() => setModalVisible(true)}>
+                        <Text style={styles.botaoTexto}>Mostrar Modal</Text>
+                    </TouchableOpacity>
+
+                    {/* Componente Modal para exibir conteúdo sobreposto */}
+                    <Modal
+                        transparent={true} // Fundo transparente
+                        visible={modalVisible} // Controla a visibilidade do modal
+                        animationType="slide" // Animação de entrada do modal
+                        onRequestClose={() => setModalVisible(false)} // Fecha o modal ao pressionar o botão de voltar
+                    >
+                        <View style={styles.modalBackground}>
+                            {/* Container do conteúdo do modal */}
+                            <View style={styles.modalContainer}>
+                                {/* Imagem exibida no modal */}
+                                <Image
+                                    source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
+                                    style={styles.modalImage}
+                                />
+                                {/* Título do modal */}
+                                <Text style={styles.modalTitle}>Bem-vindo(a)!</Text>
+                                {/* Descrição do modal */}
+                                <Text style={styles.modalDescription}>Digite seu nome abaixo para continuar.</Text>
+                                {/* Campo de entrada de texto para o nome */}
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder="Seu nome" // Texto de placeholder
+                                    value={nome} // Valor atual do campo
+                                    onChangeText={setNome} // Atualiza o estado ao digitar
+                                />
+                                {/* Botão para fechar o modal */}
+                                <TouchableOpacity style={styles.botaoModal} onPress={() => setModalVisible(false)}>
+                                    <Text style={styles.botaoTexto}>Fechar</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     );
 }
 
