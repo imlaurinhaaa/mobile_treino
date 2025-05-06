@@ -5,6 +5,7 @@ import { StyleSheet } from "react-native";
 import Persistence from "../screens/advanced/SecureStorageScreen";
 import GestureScreen from "../screens/advanced/GestureScreen";
 import MapScreen from "../screens/advanced/MapScreen";
+import ApiScreen from "../screens/advanced/ApiScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -56,6 +57,20 @@ export default function IntermediateTabs() {
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
               name={focused ? "location" : "location-outline" }
+              size={24}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Api"
+        component={ApiScreen}
+        options={{
+          tabBarLabel: "API",
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons
+              name={focused ? "code-slash" : "code-slash-outline"}
               size={24}
               color={color}
             />
